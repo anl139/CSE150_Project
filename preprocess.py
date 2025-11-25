@@ -123,13 +123,8 @@ Adult_clean.to_csv(output_path, index=False)
 
 Adult_encoded = df.copy()                                   # Create Copy for Encoded
 
-
 for col in Adult_encoded.columns:                           # Created Data Points to Integers for BN
     categories = Adult_encoded[col].astype('category').cat.categories
-    print(f"\nColumn: {col}")
-    for code, label in enumerate(categories):
-        print(f"  {code} → {label}")
-
         
 output_path1 = "Adult_encoded.csv"
 Adult_encoded.to_csv(output_path1, index=False)
