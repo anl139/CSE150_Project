@@ -65,10 +65,6 @@ for f in features:
 
 
 def posterior_income_nb(row, p_income, CPT, features):
-    """
-    Compute P(income | row) for the Naive Bayes model.
-    Returns a dict like {'<=50K': p1, '>50K': p2}.
-    """
     income_states = list(p_income.keys())
     log_scores = {}
 
@@ -89,10 +85,6 @@ def posterior_income_nb(row, p_income, CPT, features):
     return {y: exps[y] / Z for y in income_states}
 
 def postTest(test_df, condition_fn, p_income, CPT, features):
-    """
-    condition_fn: function that takes df and returns a boolean mask.
-    Example: lambda df: df["education"] == "Bachelors"
-    """
     subset = test_df[condition_fn(test_df)]
     if len(subset) == 0:
         return 0, None 
