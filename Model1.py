@@ -88,7 +88,7 @@ def posterior_income_nb(row, p_income, CPT, features):
     Z = sum(exps.values())
     return {y: exps[y] / Z for y in income_states}
 
-def avg_p_gt50_given(test_df, condition_fn, p_income, CPT, features):
+def postTest(test_df, condition_fn, p_income, CPT, features):
     """
     condition_fn: function that takes df and returns a boolean mask.
     Example: lambda df: df["education"] == "Bachelors"
@@ -105,31 +105,31 @@ def avg_p_gt50_given(test_df, condition_fn, p_income, CPT, features):
     return len(subset), sum(values) / len(values)
 
 
-n_bach, p_bach = avg_p_gt50_given(
+n_bach, p_bach = postTest(
     test,
     lambda df: df["education"] == "Bachelors",
     p_income, CPT, features
 )
 
-n_grad, p_grad = avg_p_gt50_given(
+n_grad, p_grad = postTest(
     test,
     lambda df: df["education"].isin(["Masters", "Doctorate"]),
     p_income, CPT, features
 )
 
-n_ft, p_ft = avg_p_gt50_given(
+n_ft, p_ft = postTest(
     test,
     lambda df: df["hours_bin"] == "Full-time",
     p_income, CPT, features
 )
 
-n_ext, p_ext = avg_p_gt50_given(
+n_ext, p_ext = postTest(
     test,
     lambda df: df["hours_bin"] == "Extreme",
     p_income, CPT, features
 )
 
-n_exec, p_exec = avg_p_gt50_given(
+n_exec, p_exec = postTest(
     test,
     lambda df: df["occupation"] == "Exec-managerial",
     p_income, CPT, features
